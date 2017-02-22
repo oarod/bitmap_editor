@@ -20,6 +20,8 @@ class BitmapEditor
           show_bitmap
         when 'L'
           color_pixel args
+        when 'C'
+          clear_bitmap
         when 'X'
           exit_console
         else
@@ -53,6 +55,14 @@ class BitmapEditor
       puts 'Incorrect coordinates.'
     else
       bitmap[args[1].to_i - 1][args[0].to_i - 1] = args[2]
+    end
+  end
+
+  def clear_bitmap
+    if bitmap.nil?
+      puts 'No bitmap available.'
+    else
+      @bitmap = Array.new(@bitmap.size) { Array.new(@bitmap[0].size, WHITE) }
     end
   end
 

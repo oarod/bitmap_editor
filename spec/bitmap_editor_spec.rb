@@ -45,4 +45,22 @@ describe BitmapEditor do
       expect(subject.bitmap).to eq expected
     end
   end
+
+  describe :clear_bitmap do
+    before { subject.color_pixel ['1', '1', 'P'] }
+
+    it 'should clear bitmap' do
+      expected = [
+        ['O', 'O', 'O'],
+        ['O', 'O', 'O'],
+        ['O', 'O', 'O'],
+        ['O', 'O', 'O'],
+        ['O', 'O', 'O']
+      ]
+
+      subject.clear_bitmap
+
+      expect(subject.bitmap).to eq expected
+    end
+  end
 end
