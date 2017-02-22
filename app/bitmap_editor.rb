@@ -20,6 +20,8 @@ class BitmapEditor
           show_bitmap
         when 'L'
           color_pixel args
+        when 'H'
+          color_horizontal args
         when 'C'
           clear_bitmap
         when 'X'
@@ -63,6 +65,24 @@ class BitmapEditor
       puts 'No bitmap available.'
     else
       @bitmap = Array.new(@bitmap.size) { Array.new(@bitmap[0].size, WHITE) }
+    end
+  end
+
+  def color_horizontal args
+    if !args.join(' ').match(/(\d+)\s(\d+)\s(\d+)\s([A-Z])/)
+      puts 'Incorrect arguments.'
+    elsif bitmap.nil?
+      puts 'No bitmap available.'
+    elsif !args[0].to_i.between?(1, @bitmap[0].size) || !args[1].to_i.between?(1, @bitmap[0].size) || !args[2].to_i.between?(1, @bitmap.size)
+      puts 'Incorrect coordinates.'
+    elsif args[0] > args[1]
+      puts 'Incorrect X range'
+    else
+      x1 = args[0].to_i - 1
+      x2 = args[1].to_i - 1
+      y = args[2].to_i - 1
+      c = args[3]
+      (x1..x2).each { |x| bitmap[y][x] = c }
     end
   end
 
