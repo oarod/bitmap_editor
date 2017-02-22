@@ -1,23 +1,39 @@
 class BitmapEditor
 
+  WHITE = 'O'
+
+  attr_reader :bitmap
+
   def run
     @running = true
     puts 'type ? for help'
     while @running
       print '> '
       input = gets.chomp
-      case input
+      command, *args = input.split
+      case command
         when '?'
           show_help
+        when 'I'
+          create_bitmap args
         when 'X'
           exit_console
         else
-          puts 'unrecognised command :('
+          puts 'Unrecognised command.'
       end
     end
   end
 
+  def create_bitmap(args)
+    if !args.join(' ').match(/(\d+)\s(\d+)/)
+      puts 'Incorrect arguments.'
+    else
+      @bitmap = Array.new(args[1].to_i) { Array.new(args[0].to_i, WHITE) }
+    end
+  end
+
   private
+
     def exit_console
       puts 'goodbye!'
       @running = false
