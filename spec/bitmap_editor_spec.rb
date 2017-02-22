@@ -79,4 +79,20 @@ describe BitmapEditor do
       expect(subject.bitmap).to eq expected
     end
   end
+
+  describe :color_vertical do
+    it 'should draw a vertical line of color' do
+      expected = [
+        ['O', 'O', 'O'],
+        ['O', 'O', 'O'],
+        ['O', 'P', 'O'],
+        ['O', 'P', 'O'],
+        ['O', 'P', 'O']
+      ]
+
+      subject.color_vertical ['2', '3', '5', 'P']
+
+      expect(subject.bitmap).to eq expected
+    end
+  end
 end

@@ -22,6 +22,8 @@ class BitmapEditor
           color_pixel args
         when 'H'
           color_horizontal args
+        when 'V'
+          color_vertical args
         when 'C'
           clear_bitmap
         when 'X'
@@ -83,6 +85,24 @@ class BitmapEditor
       y = args[2].to_i - 1
       c = args[3]
       (x1..x2).each { |x| bitmap[y][x] = c }
+    end
+  end
+
+  def color_vertical args
+    if !args.join(' ').match(/(\d+)\s(\d+)\s(\d+)\s([A-Z])/)
+      puts 'Incorrect arguments.'
+    elsif bitmap.nil?
+      puts 'No bitmap available.'
+    elsif !args[0].to_i.between?(1, @bitmap[0].size) || !args[1].to_i.between?(1, @bitmap.size) || !args[2].to_i.between?(1, @bitmap.size)
+      puts 'Incorrect coordinates.'
+    elsif args[1] > args[2]
+      puts 'Incorrect Y range'
+    else
+      x = args[0].to_i - 1
+      y1 = args[1].to_i - 1
+      y2 = args[2].to_i - 1
+      c = args[3]
+      (y1..y2).each { |y| bitmap[y][x] = c }
     end
   end
 
