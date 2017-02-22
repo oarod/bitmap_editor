@@ -29,4 +29,20 @@ describe BitmapEditor do
       subject.show_bitmap
     end
   end
+
+  describe :color_pixel do
+    it 'should color pixel' do
+      expected = [
+        ['O', 'O', 'O'],
+        ['P', 'O', 'O'],
+        ['O', 'O', 'O'],
+        ['O', 'O', 'O'],
+        ['O', 'O', 'O']
+      ]
+
+      subject.color_pixel ['1', '2', 'P']
+
+      expect(subject.bitmap).to eq expected
+    end
+  end
 end

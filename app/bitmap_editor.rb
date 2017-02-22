@@ -18,6 +18,8 @@ class BitmapEditor
           create_bitmap args
         when 'S'
           show_bitmap
+        when 'L'
+          color_pixel args
         when 'X'
           exit_console
         else
@@ -39,6 +41,18 @@ class BitmapEditor
       puts 'No bitmap available.'
     else
       puts bitmap.inject('') { |result, row| result << row.join << "\n" }
+    end
+  end
+
+  def color_pixel(args)
+    if !args.join(' ').match(/(\d+)\s(\d+)\s([A-Z])/)
+      puts 'Incorrect arguments.'
+    elsif bitmap.nil?
+      puts 'No bitmap available.'
+    elsif !args[0].to_i.between?(1, @bitmap[0].size) || !args[1].to_i.between?(1, @bitmap.size)
+      puts 'Incorrect coordinates.'
+    else
+      bitmap[args[1].to_i - 1][args[0].to_i - 1] = args[2]
     end
   end
 
