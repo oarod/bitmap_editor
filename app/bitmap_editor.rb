@@ -16,6 +16,8 @@ class BitmapEditor
           show_help
         when 'I'
           create_bitmap args
+        when 'S'
+          show_bitmap
         when 'X'
           exit_console
         else
@@ -29,6 +31,14 @@ class BitmapEditor
       puts 'Incorrect arguments.'
     else
       @bitmap = Array.new(args[1].to_i) { Array.new(args[0].to_i, WHITE) }
+    end
+  end
+
+  def show_bitmap
+    if bitmap.nil?
+      puts 'No bitmap available.'
+    else
+      puts bitmap.inject('') { |result, row| result << row.join << "\n" }
     end
   end
 

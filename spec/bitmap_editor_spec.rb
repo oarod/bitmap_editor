@@ -2,6 +2,8 @@ require_relative '../app/bitmap_editor'
 require_relative 'spec_helper';
 
 describe BitmapEditor do
+  before { subject.create_bitmap ['3', '5'] }
+
   subject { BitmapEditor.new }
 
   describe :create_bitmap do
@@ -14,9 +16,17 @@ describe BitmapEditor do
         ['O', 'O', 'O']
       ]
 
-      subject.create_bitmap ['3', '5']
-
       expect(subject.bitmap).to eq expected
+    end
+  end
+
+  describe :show_bitmap do
+    it 'should output bitmap' do
+      expected = "OOO\nOOO\nOOO\nOOO\nOOO\n"
+
+      expect(STDOUT).to receive(:puts).with(expected)
+
+      subject.show_bitmap
     end
   end
 end
